@@ -1,24 +1,15 @@
 import React from "react";
 import { useRecoilState } from "recoil";
+import { DisplayInvoices } from "../src/components/DisplayInvoices";
 import { invoiceAtom, invoicesAtom } from "../src/store/atoms";
 
 const index = () => {
   const [invoice, setInvoice] = useRecoilState(invoiceAtom);
   const [invoices, setInvoices] = useRecoilState(invoicesAtom);
 
-  console.log("invoices", invoices);
-
   const handleAddInvoice = (e: any) => {
     e.preventDefault();
     setInvoices([...invoices, invoice]);
-  };
-
-  const handleRemoveInvoice = (e: any, invoiceIndex: number) => {
-    e.preventDefault();
-    const filteredInvoices = invoices.filter(
-      (invoice, index) => index !== invoiceIndex
-    );
-    setInvoices(filteredInvoices);
   };
 
   return (
@@ -61,34 +52,7 @@ const index = () => {
         <button type="submit">Add Invoice</button>
       </form>
 
-      <div
-        style={{
-          width: "500px",
-          display: "flex",
-          flexDirection: "column",
-          background: "lightGray",
-        }}
-      >
-        {invoices.map((invoice, index) => {
-          return (
-            <div
-              onClick={(e) => handleRemoveInvoice(e, index)}
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-between",
-                padding: "16px",
-                alignItems: "center",
-              }}
-              key={index}
-            >
-              <h1>{invoice.description}</h1>
-              <p>{invoice.days}</p>
-              <p>{invoice.valuePerDay}</p>
-            </div>
-          );
-        })}
-      </div>
+      <DisplayInvoices />
     </div>
   );
 };
