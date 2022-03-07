@@ -1,4 +1,10 @@
-import { atom } from "recoil";
+import { atom, RecoilState } from "recoil";
+
+interface IInvoice {
+  days: number;
+  valuePerDay: number;
+  description: string;
+}
 
 const invoiceAtom = atom({
   key: "invoice",
@@ -9,4 +15,9 @@ const invoiceAtom = atom({
   },
 });
 
-export { invoiceAtom };
+const invoicesAtom = atom({
+  key: "invoices",
+  default: [] as IInvoice[],
+});
+
+export { invoiceAtom, invoicesAtom };
