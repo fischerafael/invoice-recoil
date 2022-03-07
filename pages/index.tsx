@@ -9,7 +9,12 @@ const index = () => {
 
   return (
     <div>
-      <input />
+      <input
+        value={invoice.description}
+        onChange={(e) => {
+          setInvoice({ ...invoice, description: e.target.value });
+        }}
+      />
     </div>
   );
 };
