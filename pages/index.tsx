@@ -13,6 +13,14 @@ const index = () => {
     setInvoices([...invoices, invoice]);
   };
 
+  const handleRemoveInvoice = (e: any, invoiceIndex: number) => {
+    e.preventDefault();
+    const filteredInvoices = invoices.filter(
+      (invoice, index) => index !== invoiceIndex
+    );
+    setInvoices(filteredInvoices);
+  };
+
   return (
     <div
       style={{
@@ -53,10 +61,18 @@ const index = () => {
         <button type="submit">Add Invoice</button>
       </form>
 
-      <div style={{ width: "500px", display: "flex", background: "lightGray" }}>
+      <div
+        style={{
+          width: "500px",
+          display: "flex",
+          flexDirection: "column",
+          background: "lightGray",
+        }}
+      >
         {invoices.map((invoice, index) => {
           return (
             <div
+              onClick={(e) => handleRemoveInvoice(e, index)}
               style={{
                 display: "flex",
                 width: "100%",
